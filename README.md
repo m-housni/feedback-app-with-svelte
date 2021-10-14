@@ -12,6 +12,7 @@ npm run dev
 - src/App.svelte
 - src/main.js
 ## create a feedback variable which is an array of objects like:
+```
 let feedback = [
   {
     id: 1,
@@ -29,4 +30,5 @@ let feedback = [
     text: "rating text 3"
   },
 ]
+```
 ## Create a feedbackList and feedbackItem components 
