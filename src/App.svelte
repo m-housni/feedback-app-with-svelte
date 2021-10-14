@@ -16,11 +16,21 @@
     rating: 7,
     text: "rating text 3"
   },
+	{
+    id: 4,
+    rating: 7,
+    text: "rating text 4"
+  },
 ]
 </script>
 
 <main>
-	<FeedbackList/>
+	<FeedbackList feedback="{feedback}" /> 
+	<!-- 
+		Equivalent to: 
+		<FeedbackList {feedback} /> 
+	 -->
+	
 </main>
 
 <style>

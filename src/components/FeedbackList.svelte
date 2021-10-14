@@ -1,5 +1,6 @@
 <script>
-
+  export let feedback = []
+  console.log(feedback)
 </script>
 
 <main>

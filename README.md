@@ -44,3 +44,23 @@ let feedback = [
 ```
 ## Create a feedbackList and feedbackItem components 
 ![](/assets/img1.png)
+
+## Pass the feedback variable to the FeedbackList component
+- App
+```
+<main>
+	<FeedbackList feedback="{feedback}" /> 
+	<!-- 
+		Equivalent to: 
+		<FeedbackList {feedback} /> 
+	 -->
+	
+</main>
+```
+- FeedbackList
+```
+<script>
+  export let feedback = []
+  console.log(feedback)
+</script>
+```
