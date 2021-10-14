@@ -43,4 +43,4 @@ let feedback = [
 ]
 ```
 ## Create a feedbackList and feedbackItem components 
-![](2021-10-14-12-17-10.png)
+![](/assets/img1.png)
