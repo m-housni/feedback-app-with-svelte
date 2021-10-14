@@ -4,7 +4,9 @@
 </script>
 
 <main>
-  Hello from FeedbackList
+  {#each feedback as fb (fb.id)}
+    <h3>{fb.text}</h3>
+  {/each}
 </main>
 
 <style>
