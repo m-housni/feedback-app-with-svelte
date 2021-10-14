@@ -74,3 +74,34 @@ let feedback = [
   {/each}
 </main>
 ```
+
+## Wrap the feedback in FeedBackItem and style it within Card component
+- FeedBackItem
+```
+<script>
+  import Card from './Card.svelte'
+  export let fb = ''
+</script>   
+
+<Card>
+  <p>Card</p>
+</Card>
+```
+- Card
+```
+<div class="card">
+  <slot></slot>
+</div>
+
+<style>
+  .card {
+    padding: 15px;
+    margin: 15px;
+    border-radius: 15px;
+    color: #fff;
+    background-color: purple;
+    position: relative;
+  }
+</style>
+```
+![](/assets/img2.png)
