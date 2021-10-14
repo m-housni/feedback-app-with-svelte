@@ -3,11 +3,22 @@
 In this project we will learn the basics of the Svelte  framework.
 
 ## Create New App
+
+```
 npx degit sveltejs/template feedback-app
+```
 ## Install the dependencies
+
+```
 npm i
+```
+
 ## Build the project on dev mode
+
+```
 npm run dev
+```
+
 ## Clean the starter
 - src/App.svelte
 - src/main.js
