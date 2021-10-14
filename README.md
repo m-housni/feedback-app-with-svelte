@@ -22,7 +22,7 @@ npm run dev
 ## Clean the starter
 - src/App.svelte
 - src/main.js
-## create a feedback variable which is an array of objects like:
+## Create a feedback variable as an array of objects like:
 ```
 let feedback = [
   {
@@ -43,3 +43,4 @@ let feedback = [
 ]
 ```
 ## Create a feedbackList and feedbackItem components 
+![](2021-10-14-12-17-10.png)
