@@ -7,7 +7,7 @@
 
 <main>
   {#each feedback as fb (fb.id)}
-    <FeedbackItem {fb} />
+    <FeedbackItem {fb}  on:delete-feedback/>
   {/each}
 </main>
 
