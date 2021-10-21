@@ -26,10 +26,6 @@
       text: "rating text 4"
     },
   ]
-  let list = [5,2,2]
-  // reactive value
-  $: count = feedback.length 
-  $: avg = feedback.length ? feedback.reduce((prev, cur) => { return {rating: prev.rating+cur.rating}}) : {}
 
   const deleteFeedback = (e) => {
     const fbId = e.detail
@@ -42,17 +38,6 @@
 <main class="container">
   
   <FeedbackForm />
-  
-  {#if count }
-  <div class="space-around">
-    <div class="float-left">
-      <span class="badge">{count}</span>
-    </div>
-    <div class="float-right">
-      <span class="badge">{avg.rating / count}</span>
-    </div>
-  </div>
-  {/if}
   
 	<FeedbackList feedback="{feedback}" on:delete-feedback={deleteFeedback}/> 
 	<!-- 

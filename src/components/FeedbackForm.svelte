@@ -1,26 +1,29 @@
 <script>
-
-let btnDisabled = true
+import RatingSelect from './RatingSelect.svelte'
+let btnDisabled = true, error = null
 
 const handleInput = (e) => {
   let ln = e.target.value.trim().length
   if(ln>=10) {
     btnDisabled = false
+    error = null
   } else {
     btnDisabled = true
+    error = 'Min 10 chars'
   }
 }
-
-$: error = btnDisabled ? 'Min 10 chars' : false
 
 </script>
 
 <form>
+  <RatingSelect />
   <div class="input-group text-center">
     <input type="text" placeholder="Feedback" on:input={handleInput}>
     <button disabled={btnDisabled}>Send</button>
   </div>
-  {#if error}<span class="error-badge">{error}</span>{/if}
+  {#if error}
+    <span class="error-badge">{error}</span>
+  {/if}
 </form>
 
 <style>
@@ -29,7 +32,7 @@ $: error = btnDisabled ? 'Min 10 chars' : false
     background: #fff;
     color: red;
     padding: 5px 15px;
-    border: 1px purple solid;
+    border: 1px #1E1D37 solid;
     border-radius: 10px;
     font-size:.8rem;
     margin-left: 10px;
@@ -37,7 +40,7 @@ $: error = btnDisabled ? 'Min 10 chars' : false
   }
 
   form {
-    background: purple;
+    background: #fff;
     padding: 50px 50px;
     margin: 15px;
     border-radius: 15px;

@@ -1,12 +1,13 @@
 # Feedback App with Svelte
 
-In this project we will learn the basics of the Svelte  framework.
+In this project we will learn the basics of the Svelte framework.
 
 ## Create New App
 
 ```
 npx degit sveltejs/template feedback-app
 ```
+
 ## Install the dependencies
 
 ```
@@ -20,9 +21,12 @@ npm run dev
 ```
 
 ## Clean the starter
+
 - src/App.svelte
 - src/main.js
+
 ## Create a feedback variable as an array of objects like:
+
 ```
 let feedback = [
   {
@@ -42,22 +46,28 @@ let feedback = [
   },
 ]
 ```
-## Create a feedbackList and feedbackItem components 
+
+## Create a feedbackList and feedbackItem components
+
 ![](/assets/img1.png)
 
 ## Pass the feedback variable to the FeedbackList component
+
 - App
+
 ```
 <main>
-	<FeedbackList feedback="{feedback}" /> 
-	<!-- 
-		Equivalent to: 
-		<FeedbackList {feedback} /> 
+	<FeedbackList feedback="{feedback}" />
+	<!--
+		Equivalent to:
+		<FeedbackList {feedback} />
 	 -->
-	
+
 </main>
 ```
+
 - FeedbackList
+
 ```
 <script>
   export let feedback = []
@@ -66,7 +76,9 @@ let feedback = [
 ```
 
 ## Loop and render the feedbacks
+
 - FeedbackList
+
 ```
 <main>
   {#each feedback as fb (fb.id)}
@@ -76,18 +88,22 @@ let feedback = [
 ```
 
 ## Wrap the feedback in FeedBackItem and style it within Card component
+
 - FeedBackItem
+
 ```
 <script>
   import Card from './Card.svelte'
   export let fb = ''
-</script>   
+</script>
 
 <Card>
   <p>Card</p>
 </Card>
 ```
+
 - Card
+
 ```
 <div class="card">
   <slot></slot>
@@ -99,19 +115,23 @@ let feedback = [
     margin: 15px;
     border-radius: 15px;
     color: #fff;
-    background-color: purple;
+    background-color: #1E1D37;
     position: relative;
   }
 </style>
 ```
+
 ![](/assets/img2.png)
-## Style the card elements 
+
+## Style the card elements
+
 - FeedbackItem.svelte
+
 ```
 <script>
   import Card from './Card.svelte'
   export let fb = ''
-</script>   
+</script>
 
 <Card>
   <div class="num-display">
@@ -149,10 +169,13 @@ let feedback = [
   }
 </style>
 ```
+
 ![](/assets/img3.png)
 
 ## Delete a feedback
+
 - feedbackItem
+
 ```
 <script>
   import {createEventDispatcher} from 'svelte'
@@ -165,7 +188,7 @@ let feedback = [
     dispatch('delete-feedback', fbId)
   }
 
-</script>   
+</script>
 
 <Card>
   <div class="num-display">
@@ -179,7 +202,9 @@ let feedback = [
   </div>
 </Card>
 ```
+
 - feedbackList
+
 ```
 <main>
   {#each feedback as fb (fb.id)}
@@ -187,7 +212,9 @@ let feedback = [
   {/each}
 </main>
 ```
+
 - App
+
 ```
 <script>
 	import FeedbackList from './components/FeedbackList.svelte'
@@ -209,15 +236,18 @@ let feedback = [
 </script>
 
 <main class="container">
-	<FeedbackList feedback="{feedback}" on:delete-feedback={deleteFeedback}/> 
-	<!-- 
-		Equivalent to: 
-		<FeedbackList {feedback} /> 
+	<FeedbackList feedback="{feedback}" on:delete-feedback={deleteFeedback}/>
+	<!--
+		Equivalent to:
+		<FeedbackList {feedback} />
 	 -->
 </main>
 ```
+
 ## Show feedbacks number and average
+
 - App
+
 ```
 <script>
 	import FeedbackList from './components/FeedbackList.svelte'
@@ -245,7 +275,7 @@ let feedback = [
   ]
   let list = [5,2,2]
   // reactive value
-  $: count = feedback.length 
+  $: count = feedback.length
   $: avg = feedback.length ? feedback.reduce((prev, cur) => { return {rating: prev.rating+cur.rating}}) : {}
 
   const deleteFeedback = (e) => {
@@ -259,11 +289,14 @@ let feedback = [
 <main class="container">
   <h1>Feedbacks: {count}</h1>
   {#if feedback.length}<h1>Average: {avg.rating/feedback.length}</h1> {/if}
-	<FeedbackList feedback="{feedback}" on:delete-feedback={deleteFeedback}/> 
-	<!-- 
-		Equivalent to: 
-		<FeedbackList {feedback} /> 
+	<FeedbackList feedback="{feedback}" on:delete-feedback={deleteFeedback}/>
+	<!--
+		Equivalent to:
+		<FeedbackList {feedback} />
 	 -->
 </main>
 ```
+
 ## Add a feedback form with input validation of minimum 10 chars
+
+## Add a RatinSelect component to the feedbackForm component
