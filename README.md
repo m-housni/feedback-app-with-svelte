@@ -266,3 +266,4 @@ let feedback = [
 	 -->
 </main>
 ```
+## Add a feedback form with input validation of minimum 10 chars

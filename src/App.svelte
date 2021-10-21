@@ -1,5 +1,9 @@
 <script>
 	import FeedbackList from './components/FeedbackList.svelte'
+	import FeedbackForm from './components/FeedbackForm.svelte'
+  import Card from './components/Card.svelte'
+
+
 	let feedback = [
     {
       id: 1,
@@ -36,8 +40,20 @@
 </script>
 
 <main class="container">
-  <h1>Feedbacks: {count}</h1>
-  {#if feedback.length}<h1>Average: {avg.rating/feedback.length}</h1> {/if}
+  
+  <FeedbackForm />
+  
+  {#if count }
+  <div class="space-around">
+    <div class="float-left">
+      <span class="badge">{count}</span>
+    </div>
+    <div class="float-right">
+      <span class="badge">{avg.rating / count}</span>
+    </div>
+  </div>
+  {/if}
+  
 	<FeedbackList feedback="{feedback}" on:delete-feedback={deleteFeedback}/> 
 	<!-- 
 		Equivalent to: 

@@ -66,3 +66,31 @@ button:not(:disabled):active {
 button:focus {
 	border-color: #666;
 }
+
+.text-center {
+	text-align: center;
+}
+
+.float-left {
+	float: left;
+}
+
+.float-right {
+	float: right;
+}
+
+.space-around {
+	padding-bottom: 45px;;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.badge {
+	background-color: #800080;
+	color: #fff;
+	padding: 10px;
+	border-radius: 50%;
+	text-align: center;
+	display: block;
+	min-width: 50px;
+}
