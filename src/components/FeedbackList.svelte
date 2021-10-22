@@ -1,5 +1,6 @@
 <script>
 	import FeedbackItem from './FeedbackItem.svelte'
+  import {fade, scale} from 'svelte/transition'
 
   export let feedback = []
   console.log(feedback)
@@ -13,18 +14,20 @@
 <main>
 
   {#if count }
-  <div class="space-around">
+  <div class="space-around" style="font-weight:bold">
     <div class="float-left">
-      <span class="badge">{count} {count == 1 ? 'feedback' : 'feedbacks'}</span>
+      <span class="badge">{count} {count == 1 ? 'review' : 'reviews'}</span>
     </div>
     <div class="float-right">
-      <span class="badge">{avg.rating / count}/10</span>
+      <span class="badge">Rating Everage: {avg.rating / count}/10</span>
     </div>
   </div>
   {/if}
 
   {#each feedback as fb (fb.id)}
-    <FeedbackItem {fb}  on:delete-feedback/>
+    <div in:scale out:scale>
+      <FeedbackItem {fb}  on:delete-feedback/>
+    </div>
   {/each}
 </main>
 
