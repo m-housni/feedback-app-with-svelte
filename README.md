@@ -27,7 +27,7 @@ npm run dev
 
 ## Create a feedback variable as an array of objects like:
 
-```
+```javascript
 let feedback = [
   {
     id: 1,
@@ -55,7 +55,7 @@ let feedback = [
 
 - App
 
-```
+```html
 <main>
 	<FeedbackList feedback="{feedback}" />
 	<!--
@@ -68,7 +68,7 @@ let feedback = [
 
 - FeedbackList
 
-```
+```javascript
 <script>
   export let feedback = []
   console.log(feedback)
@@ -79,7 +79,7 @@ let feedback = [
 
 - FeedbackList
 
-```
+```html
 <main>
   {#each feedback as fb (fb.id)}
     <h3>{fb.text}</h3>
@@ -91,7 +91,7 @@ let feedback = [
 
 - FeedBackItem
 
-```
+```javascript
 <script>
   import Card from './Card.svelte'
   export let fb = ''
@@ -104,7 +104,7 @@ let feedback = [
 
 - Card
 
-```
+```html
 <div class="card">
   <slot></slot>
 </div>
@@ -124,15 +124,12 @@ let feedback = [
 ![](/assets/img2.png)
 
 ## Style the card elements
-
 - FeedbackItem.svelte
-
-```
+```javascript
 <script>
   import Card from './Card.svelte'
   export let fb = ''
 </script>
-
 <Card>
   <div class="num-display">
     {fb.rating}
@@ -144,7 +141,6 @@ let feedback = [
     {fb.text}
   </div>
 </Card>
-
 <style>
   .num-display {
     position: absolute;
@@ -176,7 +172,7 @@ let feedback = [
 
 - feedbackItem
 
-```
+```javascript
 <script>
   import {createEventDispatcher} from 'svelte'
   import Card from './Card.svelte'
@@ -187,7 +183,6 @@ let feedback = [
   const handleDelete = (fbId) => {
     dispatch('delete-feedback', fbId)
   }
-
 </script>
 
 <Card>
@@ -205,7 +200,7 @@ let feedback = [
 
 - feedbackList
 
-```
+```html
 <main>
   {#each feedback as fb (fb.id)}
     <FeedbackItem {fb}  on:delete-feedback/>
@@ -215,7 +210,7 @@ let feedback = [
 
 - App
 
-```
+```javascript
 <script>
 	import FeedbackList from './components/FeedbackList.svelte'
 	let feedback = [
@@ -248,7 +243,7 @@ let feedback = [
 
 - App
 
-```
+```javascript
 <script>
 	import FeedbackList from './components/FeedbackList.svelte'
 	let feedback = [
@@ -297,6 +292,218 @@ let feedback = [
 </main>
 ```
 
-## Add a feedback form with input validation of minimum 10 chars
+## Add a feedback form
+- FeedbackForm
+```javascript
+<script>
+import {createEventDispatcher} from 'svelte'
+const dispatch = createEventDispatcher()
 
-## Add a RatinSelect component to the feedbackForm component
+import RatingSelect from './RatingSelect.svelte'
+import {v4 as uuidv4} from 'uuid'
+let btnDisabled = true, error = null
+let rating = null
+let text = ''
+
+const handleInput = (e) => {
+  let ln = e.target.value.trim().length
+  if(ln>=10) {
+    btnDisabled = false
+    error = null
+    text = e.target.value
+  } else {
+    btnDisabled = true
+    error = 'Min 10 chars'
+  }
+}
+
+const handleSelect = (e) => {
+  rating = e.detail
+}
+
+const handleSubmit = () => {
+  // validation
+  if(!rating) {
+    alert('Please rate!')
+    return
+  }
+
+  // new feedback
+  const newFeedback = {
+    id: uuidv4(),
+    text: text,
+    rating: +rating
+  }
+
+  // push new feedback to feedbacks
+  dispatch('new-feedback',newFeedback)
+  text = ''
+  
+}
+
+</script>
+
+<form on:submit|preventDefault={handleSubmit}>
+  <RatingSelect on:rating-select={handleSelect} />
+  <div class="input-group text-center">
+    <input type="text" value={text} placeholder="Feedback" on:input={handleInput}>
+    <button type="submit" disabled={btnDisabled}>Send</button>
+  </div>
+  {#if error}
+    <span class="error-badge">{error}</span>
+  {/if}
+</form>
+
+<style>
+
+  .error-badge {
+    background: #fff;
+    color: red;
+    padding: 5px 15px;
+    border: 1px #1E1D37 solid;
+    border-radius: 10px;
+    font-size:.8rem;
+    margin-left: 10px;
+
+  }
+
+  form {
+    background: #fff;
+    padding: 50px 50px;
+    margin: 15px;
+    border-radius: 15px;
+  }
+
+  .input-group {
+    border-radius: 15px;
+    border: 1px lightgray solid;
+    background: #fff;
+  }
+
+  input {
+    min-width: 75%;
+    border: none;
+    margin: 0;
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  button {
+    padding: 5px 10px;
+    font-size: 10px;
+    border-radius: 10px;
+    width: 20%;
+  }
+</style>
+```
+- RatingSelect
+```javascript
+<script>
+import {createEventDispatcher} from 'svelte'
+const dispatch = createEventDispatcher()
+let ratings =  [1,2,3,4,5,6,7,8,9,10]
+
+const onChange = (e) => {
+  dispatch('rating-select', e.currentTarget.value)
+}
+</script>
+
+<div class="radio-toolbar">
+    {#each ratings as rating (rating)}
+      <input type="radio" id="num{rating}" name="rating" value="{rating}" on:change={onChange}>
+      <label for="num{rating}">{rating}</label>
+    {/each}
+</div>
+<p>&nbsp;</p>
+
+<style>
+.radio-toolbar {
+  margin: 10px;
+  text-align: center;
+}
+
+.radio-toolbar input[type="radio"] {
+  opacity: 0;
+  position: fixed;
+  width: 0;
+}
+
+.radio-toolbar label {
+    display: inline-block;
+    background-color: #ddd;
+    width: 20px;
+    height: 20px;
+    padding:10px;
+    font-family: sans-serif, Arial;
+    font-size: 20px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    text-align: center;
+    margin: 5px
+}
+
+.radio-toolbar label:hover {
+  background-color: #dfd;
+}
+
+.radio-toolbar input[type="radio"]:focus + label {
+    border: 2px solid #444;
+}
+
+.radio-toolbar input[type="radio"]:checked + label {
+    background-color: #1E1D37;
+    color: #fff;
+    font-size: 20px;
+}
+</style>
+```
+![](/assets/img4.png)
+## add in and out transitions to feedback items
+- FeedbackList
+```javascript
+<script>
+	import FeedbackItem from './FeedbackItem.svelte'
+  import {fade, scale} from 'svelte/transition'
+
+  export let feedback = []
+  console.log(feedback)
+
+  // reactive value
+  $: count = feedback.length 
+  $: avg = feedback.length ? feedback.reduce((prev, cur) => { return {rating: prev.rating+cur.rating}}) : {}
+
+</script>
+
+<main>
+
+  {#if count }
+  <div class="space-around" style="font-weight:bold">
+    <div class="float-left">
+      <span class="badge">{count} {count == 1 ? 'review' : 'reviews'}</span>
+    </div>
+    <div class="float-right">
+      <span class="badge">Rating Everage: {avg.rating / count}/10</span>
+    </div>
+  </div>
+  {/if}
+
+  {#each feedback as fb (fb.id)}
+    <div in:scale out:scale>
+      <FeedbackItem {fb}  on:delete-feedback/>
+    </div>
+  {/each}
+</main>
+
+<style>
+  .space-around {
+    padding-bottom: 30px;;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .badge {
+    color: #fff;
+  }
+</style>
+```

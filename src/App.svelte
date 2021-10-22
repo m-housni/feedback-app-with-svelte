@@ -4,7 +4,7 @@
   import Card from './components/Card.svelte'
 
 
-	let feedback = [
+	$: feedback = [
     {
       id: 1,
       rating: 5,
@@ -33,11 +33,16 @@
       return fb.id != fbId
     })
   }
+
+  const handleNewFeedback = (e) => {
+    feedback = [e.detail, ... feedback]
+    
+  }
 </script>
 
 <main class="container">
   
-  <FeedbackForm />
+  <FeedbackForm on:new-feedback={handleNewFeedback}/>
   
 	<FeedbackList feedback="{feedback}" on:delete-feedback={deleteFeedback}/> 
 	<!-- 
