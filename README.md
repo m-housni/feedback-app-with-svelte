@@ -6,7 +6,7 @@
 
 ```
 rating-system-svelte
-├─ .git  hello hello
+├─ .git  lllllllllllllllllllllll
 ├─ .gitignore
 ├─ package-lock.json
 ├─ package.json
