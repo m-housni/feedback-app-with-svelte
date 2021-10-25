@@ -1,22 +1,31 @@
 <script>
-import {createEventDispatcher} from 'svelte'
-const dispatch = createEventDispatcher()
 
+// import modules
+import {createEventDispatcher} from 'svelte' // responsible for dispatching events between the app components, imported from node_modules/svelte/inndex.js
+const dispatch = createEventDispatcher() // so we can say: dispatch('event-name', value)
+import {v4 as uuidv4} from 'uuid' // helps in creating unique identifiers
+
+// import components
 import RatingSelect from './RatingSelect.svelte'
-import {v4 as uuidv4} from 'uuid'
-let btnDisabled = true, error = null
-let rating = null
-let text = ''
 
+// set variables
+let btnDisabled = true // tells if the button should be disabled
+let error = null // tells if an error message should be displayed
+let rating = null // sets the initial rating value
+let text = '' // sets the initial text value
+let min = 5 // minimum number of input chars
+
+// define functions
 const handleInput = (e) => {
+  // 
   let ln = e.target.value.trim().length
-  if(ln>=10) {
+  if(ln>=min) {
     btnDisabled = false
     error = null
     text = e.target.value
   } else {
     btnDisabled = true
-    error = 'Min 10 chars'
+    error = 'Min '+min+' chars'
   }
 }
 

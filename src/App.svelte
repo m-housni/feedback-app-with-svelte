@@ -55,16 +55,22 @@
 
 <main class="container">
 
+  <!-- Feedback form listening to new-feedback event -->
   <FeedbackForm on:new-feedback={handleNewFeedback} /> 
-	<FeedbackList feedback="{feedback}" on:delete-feedback={deleteFeedback}/> 
-  
+
+  <!-- 
+    Feedback list listening to delete-feedback event 
+    Tip: feedback="{feedback}" equivalent to {feedback}
+  -->
+	<FeedbackList 
+    feedback="{feedback}" 
+    on:delete-feedback={deleteFeedback}
+  /> 
 </main>
 
 <style>
-
   .container {
     max-width: 768px;
     margin: auto;
   }
-
 </style>
