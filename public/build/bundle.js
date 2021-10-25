@@ -1508,7 +1508,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (12:4) {#each ratings as rating (rating)}
+    // (14:4) {#each ratings as rating (rating)}
     function create_each_block(key_1, ctx) {
     	let input;
     	let t0;
@@ -1530,11 +1530,11 @@ var app = (function () {
     			attr_dev(input, "id", "num" + /*rating*/ ctx[3]);
     			attr_dev(input, "name", "rating");
     			input.value = /*rating*/ ctx[3];
-    			attr_dev(input, "class", "svelte-1wpbz6z");
-    			add_location(input, file$2, 12, 6, 309);
+    			attr_dev(input, "class", "svelte-1eayuzv");
+    			add_location(input, file$2, 14, 6, 536);
     			attr_dev(label, "for", "num" + /*rating*/ ctx[3]);
-    			attr_dev(label, "class", "svelte-1wpbz6z");
-    			add_location(label, file$2, 13, 6, 406);
+    			attr_dev(label, "class", "svelte-1eayuzv");
+    			add_location(label, file$2, 15, 6, 633);
     			this.first = input;
     		},
     		m: function mount(target, anchor) {
@@ -1564,7 +1564,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(12:4) {#each ratings as rating (rating)}",
+    		source: "(14:4) {#each ratings as rating (rating)}",
     		ctx
     	});
 
@@ -1575,8 +1575,6 @@ var app = (function () {
     	let div;
     	let each_blocks = [];
     	let each_1_lookup = new Map();
-    	let t0;
-    	let p;
     	let each_value = /*ratings*/ ctx[0];
     	validate_each_argument(each_value);
     	const get_key = ctx => /*rating*/ ctx[3];
@@ -1596,12 +1594,8 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			t0 = space();
-    			p = element("p");
-    			p.textContent = " ";
-    			attr_dev(div, "class", "radio-toolbar svelte-1wpbz6z");
-    			add_location(div, file$2, 10, 0, 234);
-    			add_location(p, file$2, 16, 0, 470);
+    			attr_dev(div, "class", "radio-toolbar svelte-1eayuzv");
+    			add_location(div, file$2, 11, 0, 416);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1612,9 +1606,6 @@ var app = (function () {
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].m(div, null);
     			}
-
-    			insert_dev(target, t0, anchor);
-    			insert_dev(target, p, anchor);
     		},
     		p: function update(ctx, [dirty]) {
     			if (dirty & /*ratings, onChange*/ 3) {
@@ -1632,9 +1623,6 @@ var app = (function () {
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].d();
     			}
-
-    			if (detaching) detach_dev(t0);
-    			if (detaching) detach_dev(p);
     		}
     	};
 
@@ -1652,10 +1640,11 @@ var app = (function () {
     function instance$2($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('RatingSelect', slots, []);
-    	const dispatch = createEventDispatcher();
-    	let ratings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    	const dispatch = createEventDispatcher(); // allows to call dispatch('event-name',value)
+    	let ratings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; // rating values
 
     	const onChange = e => {
+    		// arrow function (introduced in ES6) to dispatch event on rating select
     		dispatch('rating-select', e.currentTarget.value);
     	};
 

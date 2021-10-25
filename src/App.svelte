@@ -54,11 +54,10 @@
 </script>
 
 <main class="container">
-  
+
   <FeedbackForm on:new-feedback={handleNewFeedback} /> 
-
 	<FeedbackList feedback="{feedback}" on:delete-feedback={deleteFeedback}/> 
-
+  
 </main>
 
 <style>
