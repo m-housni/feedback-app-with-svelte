@@ -1,10 +1,12 @@
 <script>
+
+  // import components
 	import FeedbackList from './components/FeedbackList.svelte'
 	import FeedbackForm from './components/FeedbackForm.svelte'
   import Card from './components/Card.svelte'
 
-
 	$: feedback = [
+    // store the feedbacks in an array of objects
     {
       id: 1,
       rating: 5,
@@ -28,6 +30,7 @@
   ]
 
   const deleteFeedback = (e) => {
+    // arrow function to delete a feedback
     const fbId = e.detail
     feedback = feedback.filter((fb) => {
       return fb.id != fbId
@@ -35,22 +38,34 @@
   }
 
   const handleNewFeedback = (e) => {
-    feedback = [e.detail, ... feedback]
-    
+    // arrow function to add new feedback
+    /*
+      the dispatched event comes with a detail property that bears the value
+      ... is the spread operator:
+      EXAMPLE:
+      let numberStore = [0, 1, 2]
+      let newNumber = 12
+      numberStore = [...numberStore, newNumber]
+      console.log(numberStore)
+      // output: [0,1,2,12]
+    */
+    feedback = [e.detail, ... feedback] 
   }
 </script>
 
 <main class="container">
   
-  <FeedbackForm on:new-feedback={handleNewFeedback}/>
-  
+  <FeedbackForm on:new-feedback={handleNewFeedback} /> 
+
 	<FeedbackList feedback="{feedback}" on:delete-feedback={deleteFeedback}/> 
-	<!-- 
-		Equivalent to: 
-		<FeedbackList {feedback} /> 
-	 -->
+
 </main>
 
 <style>
+
+  .container {
+    max-width: 768px;
+    margin: auto;
+  }
 
 </style>

@@ -81,11 +81,13 @@ const handleSubmit = () => {
     border-radius: 15px;
     border: 1px lightgray solid;
     background: #fff;
+    padding: 10px;
   }
 
   input {
     min-width: 75%;
     border: none;
+    padding: 8px;
     margin: 0;
   }
 
@@ -95,8 +97,10 @@ const handleSubmit = () => {
 
   button {
     padding: 5px 10px;
-    font-size: 10px;
     border-radius: 10px;
     width: 20%;
+    float: right;
+    background: #1E1D37;
+    color: #fff;
   }
 </style>
