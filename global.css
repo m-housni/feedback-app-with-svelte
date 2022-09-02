@@ -1,0 +1,15 @@
+/* Import 'Open Sans' font */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+body {
+  font-family: 'Open Sans', sans-serif; /* Use Open Sans font if not available use sans-serif */
+  background: #1E1D37; 
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
