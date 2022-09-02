@@ -1,25 +1,24 @@
 <script>
-  import {createEventDispatcher} from 'svelte'
-  import Card from './Card.svelte'
-  export let fb = ''
+  import { createEventDispatcher } from "svelte";
+  import Card from "./Card.svelte";
+  export let fb = "";
 
-  const dispatch = createEventDispatcher()
+  const dispatch = createEventDispatcher();
 
   const handleDelete = (fbId) => {
-    dispatch('delete-feedback', fbId)
-  }
-
-</script>   
+    dispatch("delete-feedback", fbId);
+  };
+</script>
 
 <Card>
   <div class="num-display">
     {fb.rating}<sub style="font-size:.8rem">/10</sub>
   </div>
-  <div class="close" on:click={() => handleDelete(fb.id)}>
-    x
-  </div>
+  <div class="close" on:click={() => handleDelete(fb.id)}>x</div>
   <div class="text-display">
     {fb.text}
+    <br />
+    id: {fb.id}
   </div>
 </Card>
 
@@ -42,7 +41,7 @@
   .close {
     position: absolute;
     top: 10px;
-    right:20px;
+    right: 20px;
     cursor: pointer;
   }
 </style>
